@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing | Danayhia Borg – Websites for Local Businesses in Malta</title>
+  <meta name="description" content="Simple, one-off website prices for cafés, salons and local businesses in Malta. Launch offer for my first 3 clients.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1b2230;
+      --ink-soft: #545c6b;
+      --paper: #ffffff;
+      --paper-alt: #f1f3f7;
+      --accent: #2f5d50;
+      --accent-dark: #234840;
+      --accent-tint: #e3ede9;
+      --gold: #f2c14e;
+      --line: #dde1e8;
+      --heading-font: 'Bricolage Grotesque', sans-serif;
+      --body-font: 'Manrope', sans-serif;
+      --header-height: 72px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+
+    body {
+      font-family: var(--body-font);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container { width: 90%; max-width: 1080px; margin: 0 auto; }
+
+    /* ===== Header (same as portfolio) ===== */
+    .site-header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo { font-family: var(--heading-font); font-size: 1.25rem; font-weight: 700; }
+
+    .site-nav ul { list-style: none; display: flex; align-items: center; gap: 2rem; }
+    .site-nav a { font-weight: 500; color: var(--ink-soft); transition: color 0.2s; }
+    .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--ink); }
+
+    .site-nav .nav-cta {
+      background: var(--accent); color: var(--paper);
+      padding: 0.55rem 1.1rem; border-radius: 8px;
+    }
+    .site-nav .nav-cta:hover { background: var(--accent-dark); color: var(--paper); }
+
+    .nav-toggle { display: none; }
+
+    /* ===== Intro ===== */
+    .intro { padding: calc(var(--header-height) + 4.5rem) 0 3rem; }
+
+    .intro h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 14ch;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro p { font-size: 1.15rem; color: var(--ink-soft); max-width: 56ch; }
+
+    /* ===== Launch offer (the one bold element) ===== */
+    .launch {
+      background: var(--accent);
+      color: var(--paper);
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .launch h2 {
+      font-family: var(--heading-font);
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .launch-text p { color: rgba(255, 255, 255, 0.85); max-width: 42ch; margin-bottom: 1.75rem; }
+
+    /* Three spots: add class="spot taken" when a spot is filled */
+    .spots { list-style: none; display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
+
+    .spot {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--gold);
+      color: var(--ink);
+      display: grid; place-items: center;
+      font-family: var(--heading-font);
+      font-weight: 800; font-size: 1.4rem;
+    }
+
+    .spot.taken {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.55);
+      border-color: rgba(255, 255, 255, 0.35);
+      text-decoration: line-through;
+    }
+
+    .spots-caption { font-weight: 600; font-size: 0.95rem; }
+
+    .launch-prices { display: grid; gap: 1rem; }
+
+    .launch-price {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .launch-price h3 { font-family: var(--heading-font); font-size: 1.25rem; }
+
+    .launch-price .amount { display: flex; align-items: baseline; gap: 0.75rem; }
+
+    .launch-price del { color: rgba(255, 255, 255, 0.55); font-size: 1.1rem; }
+
+    .launch-price strong {
+      font-family: var(--heading-font);
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .launch-note { font-size: 0.9rem; color: rgba(255, 255, 255, 0.75); }
+
+    /* ===== Sections ===== */
+    .section { padding: 5rem 0; }
+    .section-alt { background: var(--paper-alt); }
+
+    .section-title {
+      font-family: var(--heading-font);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-intro { color: var(--ink-soft); max-width: 56ch; margin-bottom: 2.5rem; }
+
+    /* ===== Packages ===== */
+    .packages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .package { padding: 2rem; }
+    .package + .package { border-left: 1px solid var(--line); }
+
+    .package h3 { font-family: var(--heading-font); font-size: 1.6rem; margin-bottom: 0.25rem; }
+
+    .package .fit { color: var(--ink-soft); margin-bottom: 1.25rem; }
+
+    .package .price { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.25rem; }
+
+    .package .price strong {
+      font-family: var(--heading-font);
+      font-size: 2.6rem; font-weight: 800; line-height: 1;
+      color: var(--accent);
+    }
+
+    .package .price del { color: var(--ink-soft); font-size: 1.1rem; }
+
+    .package .price-note { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 1.5rem; }
+
+    .features { list-style: none; }
+
+    .features li {
+      position: relative;
+      padding: 0.6rem 0 0.6rem 1.9rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .features li::before {
+      content: "";
+      position: absolute; left: 0.1rem; top: 1rem;
+      width: 0.85rem; height: 0.45rem;
+      border-left: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(-45deg);
+    }
+
+    .features li strong { font-weight: 700; }
+
+    /* ===== Tables (extras, plans, costs) ===== */
+    .table-wrap { overflow-x: auto; }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    th, td { text-align: left; padding: 0.95rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+    th { font-family: var(--heading-font); font-size: 1.05rem; }
+
+    td.num, th.num { text-align: right; white-space: nowrap; font-weight: 700; }
+
+    .section-alt table { background: var(--paper); border-radius: 12px; overflow: hidden; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .two-col > div, .launch > div, .package { min-width: 0; }
+
+    /* ===== Steps (a real sequence) ===== */
+    .steps {
+      list-style: none;
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem 2.5rem;
+    }
+
+    .steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 1rem; }
+
+    .steps li::before {
+      content: counter(step);
+      display: block;
+      font-family: var(--heading-font);
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .steps h3 { font-family: var(--heading-font); font-size: 1.15rem; margin-bottom: 0.3rem; }
+    .steps p { color: var(--ink-soft); }
+
+    /* ===== Call to action ===== */
+    .cta { text-align: center; padding: 5rem 0; }
+
+    .cta h2 {
+      font-family: var(--heading-font);
+      font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta p { color: var(--ink-soft); margin: 0 auto 2rem; max-width: 48ch; }
+
+    .btn {
+      display: inline-block;
+      font-weight: 700;
+      padding: 0.95rem 1.7rem;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-primary { background: var(--accent); color: var(--paper); }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-secondary { border-color: var(--line); margin-left: 0.5rem; }
+    .btn-secondary:hover { border-color: var(--ink); }
+
+    /* ===== Footer ===== */
+    .site-footer { border-top: 1px solid var(--line); padding: 2rem 0; font-size: 0.9rem; color: var(--ink-soft); }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+    /* ===== Mobile ===== */
+    @media (max-width: 860px) {
+      .launch, .two-col { grid-template-columns: 1fr; }
+      .packages { grid-template-columns: 1fr; }
+      .package + .package { border-left: none; border-top: 1px solid var(--line); }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex; flex-direction: column; gap: 5px;
+        background: none; border: none; cursor: pointer;
+      }
+      .nav-toggle span { width: 25px; height: 3px; background: var(--ink); border-radius: 2px; }
+
+      .site-nav {
+        position: absolute; top: var(--header-height); left: 0; width: 100%;
+        background: var(--paper);
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 1px solid var(--line);
+      }
+      .site-nav.open { max-height: 320px; }
+      .site-nav ul { flex-direction: column; gap: 0; padding: 1rem 0; text-align: center; }
+      .site-nav a { display: block; padding: 0.75rem; }
+      .site-nav .nav-cta { display: inline-block; margin-top: 0.5rem; }
+
+      .section, .cta { padding: 3.5rem 0; }
+      .intro { padding-top: calc(var(--header-height) + 3rem); }
+      .spot { width: 54px; height: 54px; font-size: 1.2rem; }
+      .btn-secondary { margin: 0.75rem 0 0; }
+    }
+
+    @media (max-width: 520px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Danayhia Borg</a>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav">
+        <ul>
+          <li><a href="index.html#work">Work</a></li>
+          <li><a href="index.html#process">How it works</a></li>
+          <li><a href="pricing.html" aria-current="page">Pricing</a></li>
+          <li><a href="index.html#contact" class="nav-cta">Get in touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== Intro ===== -->
+    <section class="intro">
+      <div class="container">
+        <h1>Simple, one-off prices</h1>
+        <p>Pay once and the website is yours. You see a free preview of your homepage before you pay anything.</p>
+      </div>
+    </section>
+
+    <!-- ===== Launch offer ===== -->
+    <section aria-labelledby="launch-title">
+      <div class="container">
+        <div class="launch">
+          <div class="launch-text">
+            <h2 id="launch-title">Launch offer for my first 3 clients</h2>
+            <p>I'm taking on three businesses at a reduced price. In return, I ask for a Google review and permission to show your site in my portfolio.</p>
+
+            <!-- When a spot is filled, change class="spot" to class="spot taken" and update the caption -->
+            <ul class="spots" aria-label="Launch spots">
+              <li class="spot" aria-label="Spot 1 available">1</li>
+              <li class="spot" aria-label="Spot 2 available">2</li>
+              <li class="spot" aria-label="Spot 3 available">3</li>
+            </ul>
+            <p class="spots-caption">3 of 3 spots still available</p>
+          </div>
+
+          <div class="launch-prices">
+            <div class="launch-price">
+              <h3>Starter</h3>
+              <div class="amount">
+                <del>€350</del>
+                <strong>€250</strong>
+              </div>
+            </div>
+            <div class="launch-price">
+              <h3>Business</h3>
+              <div class="amount">
+                <del>€650</del>
+                <strong>€450</strong>
+              </div>
+            </div>
+            <p class="launch-note">Everything else in the package stays exactly the same.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Packages ===== -->
+    <section class="section" aria-labelledby="packages-title">
+      <div class="container">
+        <h2 class="section-title" id="packages-title">What each package includes</h2>
+        <p class="section-intro">Both packages are designed around your business, work on every phone, and are yours once paid in full.</p>
+
+        <div class="packages">
+          <div class="package">
+            <h3>Starter</h3>
+            <p class="fit">For cafés, salons and shops that need one strong page.</p>
+            <div class="price"><strong>€250</strong><del>€350</del></div>
+            <p class="price-note">Launch price for my first 3 clients</p>
+            <ul class="features">
+              <li>One page with sections: home, menu or services, about, gallery, contact</li>
+              <li>Gallery with up to <strong>6 photos</strong></li>
+              <li>Opening hours and Google Maps</li>
+              <li>Contact form sent to your email</li>
+              <li>WhatsApp and click-to-call buttons</li>
+              <li>Google Business Profile setup</li>
+              <li><strong>2</strong> rounds of design changes</li>
+              <li>Free bug fixes for 30 days after launch</li>
+              <li>Ready in about <strong>1 week</strong> once I have your content</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Business</h3>
+            <p class="fit">For businesses with a bigger menu, many services or more to say.</p>
+            <div class="price"><strong>€450</strong><del>€650</del></div>
+            <p class="price-note">Launch price for my first 3 clients</p>
+            <ul class="features">
+              <li>Up to <strong>5 separate pages</strong></li>
+              <li>Gallery with up to <strong>15 photos</strong></li>
+              <li>Opening hours and Google Maps</li>
+              <li>Contact form sent to your email</li>
+              <li>WhatsApp and click-to-call buttons</li>
+              <li>Google Business Profile setup</li>
+              <li><strong>3</strong> rounds of design changes</li>
+              <li>Free bug fixes for 30 days after launch</li>
+              <li>Ready in about <strong>2 weeks</strong> once I have your content</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Extras & plans ===== -->
+    <section class="section section-alt" aria-labelledby="extras-title">
+      <div class="container two-col">
+        <div>
+          <h2 class="section-title" id="extras-title">Extras</h2>
+          <p class="section-intro">Add any of these to either package.</p>
+          <div class="table-wrap">
+            <table>
+              <tbody>
+                <tr><td>Extra page</td><td class="num">€75</td></tr>
+                <tr><td>Extra round of design changes</td><td class="num">€40</td></tr>
+                <tr><td>I write your website text for you</td><td class="num">€60</td></tr>
+                <tr><td>Resizing and editing over 20 photos</td><td class="num">€25</td></tr>
+                <tr><td>Changes after launch, without a plan</td><td class="num">€25 / hour</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Monthly care plans</h2>
+          <p class="section-intro">Optional. Month to month, cancel with 30 days' notice.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th></th><th>Basic</th><th>Plus</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Price</td><td><strong>€25</strong> / month</td><td><strong>€45</strong> / month</td></tr>
+                <tr><td>Updates to prices, hours, photos and text</td><td>Up to 30 min</td><td>Up to 1.5 hours</td></tr>
+                <tr><td>Monthly site and form check</td><td>Included</td><td>Included</td></tr>
+                <tr><td>Domain renewal reminders</td><td>Included</td><td>Included</td></tr>
+                <tr><td>I reply within</td><td>3 working days</td><td>1 working day</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Costs paid directly ===== -->
+    <section class="section" aria-labelledby="costs-title">
+      <div class="container">
+        <h2 class="section-title" id="costs-title">Costs you pay directly</h2>
+        <p class="section-intro">These are in your name, so you always own them. I set them all up for you.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Item</th><th>Paid to</th><th>Typical cost</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Domain (.com.mt or .mt)</td><td>A NIC Malta-accredited registrar</td><td>Yearly fee, plus a one-off setup fee for .com.mt</td></tr>
+              <tr><td>Domain (.com)</td><td>A domain registrar</td><td>About €10–15 a year</td></tr>
+              <tr><td>Hosting</td><td>Netlify</td><td>Free for a site this size</td></tr>
+              <tr><td>Contact form</td><td>Formspree</td><td>Free for a small business's usual messages</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== How payment works ===== -->
+    <section class="section section-alt" aria-labelledby="steps-title">
+      <div class="container">
+        <h2 class="section-title" id="steps-title">How it works</h2>
+        <p class="section-intro">Half to start, half when your site goes live. Bank transfer or Revolut.</p>
+        <ol class="steps">
+          <li>
+            <h3>Free preview</h3>
+            <p>I make a preview of your homepage. No cost, no commitment.</p>
+          </li>
+          <li>
+            <h3>Agreement and 50% deposit</h3>
+            <p>You sign a short agreement and pay half to get started.</p>
+          </li>
+          <li>
+            <h3>Send your content</h3>
+            <p>Your logo, photos, menu or services, prices and opening hours.</p>
+          </li>
+          <li>
+            <h3>Build and changes</h3>
+            <p>I build the site and you review it within your included rounds.</p>
+          </li>
+          <li>
+            <h3>Launch</h3>
+            <p>You pay the other 50%, and I connect your domain and put it live.</p>
+          </li>
+          <li>
+            <h3>After launch</h3>
+            <p>Bug fixes are free for 30 days, then a care plan or the hourly rate.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Call to action ===== -->
+    <section class="cta">
+      <div class="container">
+        <h2>Want to see your business online?</h2>
+        <p>Send me your business name and I'll make you a free preview of your homepage.</p>
+        <a href="index.html#contact" class="btn btn-primary">Ask for a free preview</a>
+        <a href="index.html#work" class="btn btn-secondary">See my work</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Danayhia Borg</p>
+      <p>Websites for local businesses in Malta</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
